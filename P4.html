@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #42275a, #734b6d);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+            background: #fff;
+            color: #42275a;
+            font-weight: bold;
+        }
+
+        button:hover { transform: scale(1.05); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Panel</h2>
+    <input type="password" id="admin-pass" placeholder="Enter admin password">
+    <button onclick="showDetails()">Submit</button>
+
+    <table id="details-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody id="details-body"></tbody>
+    </table>
+</div>
+
+<script>
+function showDetails() {
+    const pass = document.getElementById("admin-pass").value.trim();
+    if(pass === "vvvvvvv") {
+        const allDetails = JSON.parse(localStorage.getItem("allDetails") || "[]");
+        const tbody = document.getElementById("details-body");
+        tbody.innerHTML = "";
+
+        allDetails.forEach(d => {
+            const row = `<tr>
+                <td>${d.name}</td>
+                <td>${d.age}</td>
+                <td>${d.email}</td>
+                <td>${d.userpass}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+
+        document.getElementById("details-table").style.display = "table";
+    } else {
+        alert("Incorrect admin password!");
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            width: 350px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+            background: #fff;
+            color: #1f4037;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { transform: scale(1.05); }
+        #warn { display:none; color: yellow; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Private Password</h2>
+    <input type="password" id="private-pass" placeholder="Enter password">
+    <button onclick="unlock()">Submit</button>
+    <p id="warn">Incorrect password!</p>
+</div>
+
+<script>
+function unlock() {
+    const pass = document.getElementById("private-pass").value.trim();
+
+    // ✔ If password is "zxcvbnm" → MOVIES PAGE
+    if(pass === "zxcvbnm") {
+
+        // Save details for admin page
+        const name = localStorage.getItem("name") || "N/A";
+        const age = localStorage.getItem("age") || "N/A";
+        const email = localStorage.getItem("email") || "N/A";
+        const userpass = localStorage.getItem("userpass") || "N/A";
+
+        let allDetails = JSON.parse(localStorage.getItem("allDetails") || "[]");
+        allDetails.push({name, age, email, userpass});
+        localStorage.setItem("allDetails", JSON.stringify(allDetails));
+
+        // Clear temporary values
+        localStorage.removeItem("name");
+        localStorage.removeItem("age");
+        localStorage.removeItem("email");
+        localStorage.removeItem("userpass");
+
+        // 🔥 Redirect to MOVIES PAGE
+        window.location.href = "file:///C:/Users/Amol/Documents/EP/movie.html";  
+        return;
+    }
+
+    // ✔ If password is "vedanttt07" → LOCAL PAGE 4
+    if(pass === "vedanttt07") {
+        window.location.href = "file:///C:/Users/Amol/Documents/EP/P4.html";
+        return;
+    }
+
+    // ❌ Otherwise incorrect
+    document.getElementById("warn").style.display = "block";
+}
+</script>
+
+</body>
+</html>

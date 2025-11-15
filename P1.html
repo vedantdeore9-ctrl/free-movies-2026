@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            width: 350px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+            background: #fff;
+            color: #2575fc;
+            font-weight: bold;
+        }
+
+        button:hover { transform: scale(1.05); }
+        #warning { display:none; color: yellow; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Details</h2>
+    <input type="text" id="name" placeholder="Enter your name">
+    <input type="number" id="age" placeholder="Enter your age">
+    <input type="text" id="search" placeholder="Search (type 'movies')">
+    <button onclick="goNext()">Go</button>
+    <p id="warning">Age must be 19 or above!</p>
+</div>
+
+<script>
+function goNext() {
+    const name = document.getElementById('name').value.trim();
+    const age = parseInt(document.getElementById('age').value);
+    const search = document.getElementById('search').value.toLowerCase().trim();
+
+    if(!name || !age || !search) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    if(age < 19) {
+        document.getElementById('warning').style.display = "block";
+        return;
+    }
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("age", age);
+
+    if(search === "movies") {
+        window.location.href = "file:///C:/Users/Amol/Documents/EP/P2.html";
+    } else {
+        alert("Search not recognized. Type 'movies'");
+    }
+}
+</script>
+
+</body>
+</html>
